@@ -15,5 +15,6 @@ const Stat = StatModel(sequelize, Sequelize);
 sequelize.sync();
 
 module.exports = {
-    Stat
+    Stat,
+    sequelize
 };
