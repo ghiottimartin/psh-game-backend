@@ -3,9 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-const dotenv = require('dotenv');
-dotenv.config();
+var cron = require('node-cron');
+const cronStats = require('./cron/stats');
 
 require('./db/config');
 
@@ -39,6 +38,11 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+// insert stats of players every 5 minutes.
+cron.schedule('*/5 * * * *', () => {
+  cronStats.insertStats();
 });
 
 module.exports = app;
