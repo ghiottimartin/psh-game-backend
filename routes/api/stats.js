@@ -24,4 +24,6 @@ router.post('/', async (req, res) => {
 
 router.get('/report', statController.getTopTen);
 
+router.get('/csv', statController.csv);
+
 module.exports = router;
